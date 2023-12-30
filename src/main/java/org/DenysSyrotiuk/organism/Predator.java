@@ -1,4 +1,4 @@
-package org.DenysSyrotiuk;
+package org.DenysSyrotiuk.organism;
 
-public abstract class Predator {
+public abstract class Predator extends Animal {
 }

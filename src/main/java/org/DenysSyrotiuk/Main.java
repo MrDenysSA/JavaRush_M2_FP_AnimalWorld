@@ -1,19 +1,65 @@
 package org.DenysSyrotiuk;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import org.DenysSyrotiuk.creatWorld.CreationWorld;
+import org.DenysSyrotiuk.map.Cell;
+import org.DenysSyrotiuk.map.GameField;
+import org.DenysSyrotiuk.organism.Daisy;
+import org.DenysSyrotiuk.organism.Fern;
+import org.DenysSyrotiuk.organism.Organism;
+import org.DenysSyrotiuk.organism.Plant;
+
+import java.lang.reflect.Type;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+/*        Map<Type, Set<? extends Organism>> fernSet = new HashMap<>();
 
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        Fern fern = new Fern();
+        fern.setIcon("\uD83C\uDF3F");
+        fern.setMaxWeight(1);
+        fern.setMaxAmount(100);
 
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
+        Daisy daisy = new Daisy();
+        daisy.setIcon("\uD83C\uDF3C");
+        daisy.setMaxWeight(2);
+        daisy.setMaxAmount(50);
+
+        Set<Fern> ferns = new HashSet<>();
+        Set<Daisy> daisies = new HashSet<>();
+
+        Random random = new Random();
+        int randomCountPlants = random.nextInt(0, fern.getMaxAmount());
+        for (int i = 0; i < randomCountPlants; i++) {
+            ferns.add(fern.reproduce());
         }
+        int randomCountPlants2 = random.nextInt(0, daisy.getMaxAmount());
+        for (int i = 0; i < randomCountPlants2; i++) {
+            daisies.add(daisy.reproduce());
+        }
+
+        fernSet.put(Fern.class,ferns );
+        fernSet.put(Daisy.class,daisies );
+
+
+
+        Cell cell = new Cell();
+        cell.residents.putAll(fernSet);*/
+
+
+/*        GameField gameField = new GameField();
+        gameField.initializationCell();
+
+        System.out.println(gameField.cells.length);
+
+        for (int i = 0; i < gameField.cells.length; i++) {
+            gameField.cells[i] =
+        }*/
+
+
+
+        CreationWorld world = new CreationWorld();
+
+        System.out.println("FIN");
     }
 }

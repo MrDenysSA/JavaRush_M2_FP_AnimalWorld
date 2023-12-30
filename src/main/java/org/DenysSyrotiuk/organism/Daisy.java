@@ -7,10 +7,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class Fern extends Plant {
+public class Daisy extends Plant {
     @Override
-    public Fern reproduce() {
-        Fern reproduce = new Fern();
+    public Daisy reproduce() {
+        Daisy reproduce = new Daisy();
         reproduce.setIcon(getIcon());
         reproduce.setMaxAmount(getMaxAmount());
         reproduce.setMaxWeight(getMaxWeight());

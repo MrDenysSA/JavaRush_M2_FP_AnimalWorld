@@ -1,6 +1,15 @@
-package org.DenysSyrotiuk;
+package org.DenysSyrotiuk.organism;
 
-public abstract class Animal {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+
+@Getter
+@ToString
+public abstract class Animal extends Organism {
     private String icon;    // Іконка
     private int weight;     // Вага цієї однієї тварини, кг
     private int maxAmount;  // Максимальна кількість тварин цього виду на одній клітинці
@@ -10,7 +19,6 @@ public abstract class Animal {
     private boolean isAlive = true; // TODO: якщо false то тваринка вибуває і видаляється
     private int maxWeight;
     private int health;  // TODO: шкала зроровʼя (Ситність) . 1 клітинка переміщення -5 к життю.
-
 
 
     // Вовк має вагу 50 кг

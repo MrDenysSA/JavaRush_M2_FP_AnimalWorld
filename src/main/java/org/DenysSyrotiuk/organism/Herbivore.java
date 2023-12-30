@@ -1,2 +1,4 @@
-package org.DenysSyrotiuk.organism;public class herbivore {
+package org.DenysSyrotiuk.organism;
+
+public abstract class Herbivore extends Animal {
 }
