@@ -6,6 +6,6 @@ public class Start {
     }
     public void creatWorld(){
         this.world =  new CreationWorld();
-        world.creteField(); // Заповнюємо світ
+
     }
 }

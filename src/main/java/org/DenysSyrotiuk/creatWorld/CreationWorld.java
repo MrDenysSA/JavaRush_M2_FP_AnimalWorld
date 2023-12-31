@@ -1,6 +1,5 @@
 package org.DenysSyrotiuk.creatWorld;
 
-import lombok.SneakyThrows;
 import org.DenysSyrotiuk.map.GameField;
 import org.DenysSyrotiuk.organism.Organism;
 import org.DenysSyrotiuk.organism.Plant;
@@ -13,24 +12,23 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class CreationWorld {
-    public SerializationYaml serializationYaml = new SerializationYaml();
-    public String pathGameField = "src/main/resources/map/gameField.yaml";
-    public Map<Type, Organism> deserializationOrganisms = new HashMap<>();
+    private SerializationYaml serializationYaml = new SerializationYaml();
+    private Map<Type, Organism> deserializationOrganisms = new HashMap<>();
     public GameField gameField;
 
     public CreationWorld() {
-        creteField(); //ПРАЦЮЄ. Десерівлізує GameField. ініціалізує пусті Cell.
+        creteField(); //ПРАЦЮЄ. Десеріалізує GameField. ініціалізує пусті Cell.
         loadPlants(); //ПРАЦЮЄ. Десерівлізує Рослини до списку "deserializationOrganisms"
-        addPlantsToGameField();
+        addPlantsToGameField(); //ПРАЦЮЄ з рослинми. Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
     }
 
-    public void creteField() {
+    private void creteField() {
+        String pathGameField = "src/main/resources/map/gameField.yaml";
         gameField = serializationYaml.pull(pathGameField, GameField.class);
         gameField.initializationCell();  // создаем поле и звполняем его Селами пока пустыми
-        statistics("creteField() : ");
     }
 
-    public void loadPlants() {
+    private void loadPlants() {
         Path directory = Path.of("src/main/resources/plants/");
         try (DirectoryStream<Path> files = Files.newDirectoryStream(directory)) {
             for (Path p : files) {
@@ -47,10 +45,9 @@ public class CreationWorld {
         }
     }
 
-    public void addPlantsToGameField() {
+    private void addPlantsToGameField() {
         Random random = new Random();
-        for (int i = 0; i < gameField.cells.length; i++) { // <бігаемо по кожному спсиску
-
+        for (int i = 0; i < gameField.cells.length; i++) {
             for (Type type : deserializationOrganisms.keySet()) {
                 Plant p = (Plant) deserializationOrganisms.get(type);
                 int randomCountPlants = random.nextInt(0, p.getMaxAmount());
@@ -58,16 +55,9 @@ public class CreationWorld {
                 for (int j = 0; j < randomCountPlants; j++) {
                     plantSet.add(p.reproduce());
                 }
-                gameField.cells[i].residents.put(p.getClass(),plantSet);
+                gameField.cells[i].residents.put(p.getClass(), plantSet);
             }
-
         }
-        System.out.println(gameField); // Удалить потом
-    }
-
-
-    public void statistics(String where) {
-        System.out.println(where + gameField);
     }
 
     @Override
