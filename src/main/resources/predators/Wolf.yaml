@@ -1,0 +1,10 @@
+---
+maxAmount: 30
+icon: "🐺"
+maxWeight: 50
+weight: 50
+speed: 3
+maxFood: 8.0
+targetMatrix:
+  org.DenysSyrotiuk.organism.herbivores.Rabbit: 60
+alive: true

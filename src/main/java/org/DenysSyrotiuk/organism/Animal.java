@@ -1,29 +1,32 @@
 package org.DenysSyrotiuk.organism;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.DenysSyrotiuk.actionsOrganism.Eat;
+import org.DenysSyrotiuk.actionsOrganism.Movable;
+import org.DenysSyrotiuk.map.Cell;
 
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
+@Setter
 @ToString
-public abstract class Animal extends Organism {
-    private String icon;    // Іконка
-    private int weight;     // Вага цієї однієї тварини, кг
-    private int maxAmount;  // Максимальна кількість тварин цього виду на одній клітинці
-    private int speed;      // Швидкість переміщення, не більше ніж клітинок за хід
-    private int maxFood;    // Скільки кілограмів їжі потрібно тварині для повного насичення
+public abstract class Animal extends Organism implements Movable, Eat {
 
+    private String  icon;       // Іконка
+    private int     maxWeight;  // Щоб тварина відновлювала вагу коли їла інших тварин
+    private int     weight;     // Вага цієї однієї тварини, кг в момент. Зменьшується с кожнім тактом. Помирає якщо 0 кг.
+//    private int     maxAmount;  // Для початкового наповнення і для того щоб не ходили на клітинку це тварин максимум
+    private int     speed;      // Швидкість переміщення, не більше ніж клітинок за хід
+    private double  maxFood;
     private boolean isAlive = true; // TODO: якщо false то тваринка вибуває і видаляється
-    private int maxWeight;
-    private int health;  // TODO: шкала зроровʼя (Ситність) . 1 клітинка переміщення -5 к життю.
 
-
-    // Вовк має вагу 50 кг
-    // Життя 100 ( за кожен такт тваринка втрачає життя ( health - (5 * speed) )
-    // Вовск втрачає за такт 15 рунктів життя.
-    // якщо в клітинці є хдобіч то тварика не втрачає житття.
+    @Builder.Default
+    public Map<Class<? extends Organism>, Integer> targetMatrix = new HashMap<>(); // Список тварин яких можна їсти.
+    @JsonIgnore
+    private Cell cell;
 
 }

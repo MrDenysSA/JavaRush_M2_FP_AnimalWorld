@@ -1,64 +1,44 @@
 package org.DenysSyrotiuk;
 
 import org.DenysSyrotiuk.creatWorld.CreationWorld;
-import org.DenysSyrotiuk.map.Cell;
-import org.DenysSyrotiuk.map.GameField;
-import org.DenysSyrotiuk.organism.Daisy;
-import org.DenysSyrotiuk.organism.Fern;
-import org.DenysSyrotiuk.organism.Organism;
-import org.DenysSyrotiuk.organism.Plant;
-
-import java.lang.reflect.Type;
-import java.util.*;
+import org.DenysSyrotiuk.creatWorld.SerializationYaml;
+import org.DenysSyrotiuk.organism.herbivores.Rabbit;
+import org.DenysSyrotiuk.organism.predators.Wolf;
+import org.DenysSyrotiuk.organism.plants.Daisy;
+import org.DenysSyrotiuk.organism.plants.Fern;
 
 public class Main {
     public static void main(String[] args) {
-/*        Map<Type, Set<? extends Organism>> fernSet = new HashMap<>();
 
-        Fern fern = new Fern();
-        fern.setIcon("\uD83C\uDF3F");
-        fern.setMaxWeight(1);
-        fern.setMaxAmount(100);
+        Wolf wolf = new Wolf();
+        wolf.setIcon("\uD83D\uDC3A");
+        wolf.setMaxWeight(50);
+        wolf.setWeight(50);
+        wolf.setMaxAmount(30);
+        wolf.setSpeed(3);
+        wolf.setMaxFood(8);
+        wolf.targetMatrix.put(Rabbit.class,60);
 
-        Daisy daisy = new Daisy();
-        daisy.setIcon("\uD83C\uDF3C");
-        daisy.setMaxWeight(2);
-        daisy.setMaxAmount(50);
+        Rabbit rabbit = new Rabbit();
+        rabbit.setIcon("\uD83D\uDC07");
+        rabbit.setMaxWeight(2);
+        rabbit.setWeight(2);
+        rabbit.setMaxAmount(150);
+        rabbit.setSpeed(2);
+        rabbit.setMaxFood(0.45);
+        rabbit.targetMatrix.put(Daisy.class,100);
+        rabbit.targetMatrix.put(Fern.class,100);
 
-        Set<Fern> ferns = new HashSet<>();
-        Set<Daisy> daisies = new HashSet<>();
+        System.out.println(rabbit.getClass().getSuperclass().getSimpleName().toLowerCase());
 
-        Random random = new Random();
-        int randomCountPlants = random.nextInt(0, fern.getMaxAmount());
-        for (int i = 0; i < randomCountPlants; i++) {
-            ferns.add(fern.reproduce());
-        }
-        int randomCountPlants2 = random.nextInt(0, daisy.getMaxAmount());
-        for (int i = 0; i < randomCountPlants2; i++) {
-            daisies.add(daisy.reproduce());
-        }
+        SerializationYaml serializationYaml = new SerializationYaml();
 
-        fernSet.put(Fern.class,ferns );
-        fernSet.put(Daisy.class,daisies );
-
-
-
-        Cell cell = new Cell();
-        cell.residents.putAll(fernSet);*/
-
-
-/*        GameField gameField = new GameField();
-        gameField.initializationCell();
-
-        System.out.println(gameField.cells.length);
-
-        for (int i = 0; i < gameField.cells.length; i++) {
-            gameField.cells[i] =
-        }*/
-
+        serializationYaml.pushOrganism(wolf);
+        serializationYaml.pushOrganism(rabbit);
 
 
         CreationWorld world = new CreationWorld();
+
 
         System.out.println("FIN");
     }

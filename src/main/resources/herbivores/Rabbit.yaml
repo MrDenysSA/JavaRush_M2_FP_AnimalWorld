@@ -1,0 +1,11 @@
+---
+maxAmount: 150
+icon: "🐇"
+maxWeight: 2
+weight: 2
+speed: 2
+maxFood: 0.45
+targetMatrix:
+  org.DenysSyrotiuk.organism.plants.Fern: 100
+  org.DenysSyrotiuk.organism.plants.Daisy: 100
+alive: true

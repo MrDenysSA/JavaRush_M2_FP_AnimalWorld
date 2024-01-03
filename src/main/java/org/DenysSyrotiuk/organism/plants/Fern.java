@@ -1,16 +1,15 @@
-package org.DenysSyrotiuk.organism;
+package org.DenysSyrotiuk.organism.plants;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Set;
+import org.DenysSyrotiuk.organism.Plant;
 
 @Getter
 @Setter
-public class Daisy extends Plant {
+public class Fern extends Plant {
     @Override
-    public Daisy reproduce() {
-        Daisy reproduce = new Daisy();
+    public Fern reproduce() {
+        Fern reproduce = new Fern();
         reproduce.setIcon(getIcon());
         reproduce.setMaxAmount(getMaxAmount());
         reproduce.setMaxWeight(getMaxWeight());

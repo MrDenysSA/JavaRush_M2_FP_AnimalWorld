@@ -11,4 +11,5 @@ import java.io.Serializable;
 @Setter
 @ToString
 public abstract class Organism implements Reproducile {
+    private int     maxAmount;
 }
