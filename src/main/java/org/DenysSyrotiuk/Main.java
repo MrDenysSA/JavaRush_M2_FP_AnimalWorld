@@ -10,7 +10,7 @@ import org.DenysSyrotiuk.organism.plants.Fern;
 public class Main {
     public static void main(String[] args) {
 
-        Wolf wolf = new Wolf();
+/*        Wolf wolf = new Wolf();
         wolf.setIcon("\uD83D\uDC3A");
         wolf.setMaxWeight(50);
         wolf.setWeight(50);
@@ -34,7 +34,7 @@ public class Main {
         SerializationYaml serializationYaml = new SerializationYaml();
 
         serializationYaml.pushOrganism(wolf);
-        serializationYaml.pushOrganism(rabbit);
+        serializationYaml.pushOrganism(rabbit);*/
 
 
         CreationWorld world = new CreationWorld();

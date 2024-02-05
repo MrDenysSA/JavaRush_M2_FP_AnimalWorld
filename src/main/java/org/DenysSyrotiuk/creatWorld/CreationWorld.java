@@ -1,5 +1,6 @@
 package org.DenysSyrotiuk.creatWorld;
 
+import org.DenysSyrotiuk.StatisticMonitor;
 import org.DenysSyrotiuk.map.GameField;
 import org.DenysSyrotiuk.organism.Animal;
 import org.DenysSyrotiuk.organism.Organism;
@@ -21,6 +22,7 @@ public class CreationWorld {
         creteField(); //ПРАЦЮЄ. Десеріалізує GameField. ініціалізує пусті Cell.
         loadOrganisms(); //ПРАЦЮЄ. Десерівлізує Рослини до списку "deserializationOrganisms
         addPlantsToGameField(); //ПРАЦЮЄ з рослинми. Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
+        new StatisticMonitor().view(gameField);
         System.out.println("Hia");
     }
 
