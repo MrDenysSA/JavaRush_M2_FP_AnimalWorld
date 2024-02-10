@@ -99,7 +99,7 @@ public class CreationWorld {
                             if (organism instanceof Animal) {
                                 if (!organism.isAlive()) {
 
-                                    gameField.cells[count].residents.remove(type,organism);
+                                    gameField.cells[count].residents.forEach((t,o) ->o.remove(organism));
 
                                 }
                             }
