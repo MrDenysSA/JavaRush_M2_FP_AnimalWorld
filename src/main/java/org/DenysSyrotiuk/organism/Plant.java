@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public abstract class Plant extends Organism {
-    private String icon;
-    private int maxWeight; // Вага. Після кожного такту регенерує свою вагу.
-//    private int maxAmount;  // Максимальна кількість на одній клітинці.
+//    private String icon;
+//    private int weight; // Вага. Після кожного такту регенерує свою вагу.
+////    private int maxAmount;  // Максимальна кількість на одній клітинці.
 }

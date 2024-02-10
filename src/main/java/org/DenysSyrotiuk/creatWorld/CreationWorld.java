@@ -12,6 +12,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CreationWorld {
     private SerializationYaml serializationYaml = new SerializationYaml();
@@ -21,7 +22,9 @@ public class CreationWorld {
     public CreationWorld() {
         creteField(); //ПРАЦЮЄ. Десеріалізує GameField. ініціалізує пусті Cell.
         loadOrganisms(); //ПРАЦЮЄ. Десерівлізує Рослини до списку "deserializationOrganisms
-        addPlantsToGameField(); //ПРАЦЮЄ з рослинми. Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
+        addPlantsToGameField(); //ПРАЦЮЄ  Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
+        new StatisticMonitor().view(gameField);
+        eatAnimal();
         new StatisticMonitor().view(gameField);
         System.out.println("Hia");
     }
@@ -71,6 +74,43 @@ public class CreationWorld {
                 gameField.cells[i].residents.put(p.getClass(), plantSet);
             }
         }
+    }
+
+    private void eatAnimal() {
+        for (int i = 0; i < gameField.cells.length; i++) {
+            int count = i;
+
+            gameField.cells[i].residents.forEach((type, organisms) -> {
+                for (Organism organism : organisms) {
+                    if (organism instanceof Animal) {
+                        if (organism.isAlive()) {
+                            ((Animal) organism).eat(gameField.cells[count].residents);
+                        }
+                    }
+                }
+            });
+
+            Map<Type, Set<? extends Organism>> CopyResidents = new HashMap<>(gameField.cells[i].residents);
+
+//            gameField.cells[i].residents.forEach((type, organisms) -> organisms.stream().filter(o -> !o.isAlive() || o instanceof Animal).collect(Collectors.toMap()));
+//
+            CopyResidents.forEach((type, organisms) -> {
+                if (organisms instanceof Animal) {
+                    for (Organism organism : organisms) {
+                        if (!organism.isAlive()) {
+                            gameField.cells[count].residents.forEach((type1, organisms1) -> organisms1.remove(organism));
+//                            organisms.remove(type, organism);
+                        }
+                    }
+                }
+
+            });
+
+
+        }
+
+
+        System.out.println("Hia");
     }
 
     @Override

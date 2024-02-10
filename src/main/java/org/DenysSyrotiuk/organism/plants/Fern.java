@@ -12,7 +12,7 @@ public class Fern extends Plant {
         Fern reproduce = new Fern();
         reproduce.setIcon(getIcon());
         reproduce.setMaxAmount(getMaxAmount());
-        reproduce.setMaxWeight(getMaxWeight());
+        reproduce.setWeight(getWeight());
         return reproduce;
     }
 }

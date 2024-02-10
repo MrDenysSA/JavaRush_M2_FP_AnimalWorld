@@ -18,11 +18,11 @@ public class Rabbit extends Herbivore {
             Rabbit reproduce = new Rabbit();
             reproduce.setCell(getCell());
             reproduce.setIcon(getIcon());
-            reproduce.setMaxWeight(getMaxWeight());
+            reproduce.setMaxFood(getMaxFood());
             reproduce.setWeight(getWeight());
             reproduce.setMaxAmount(getMaxAmount());
             reproduce.setSpeed(getSpeed());
-            reproduce.setMaxFood(getMaxFood());
+//            reproduce.setMaxFood(getMaxFood());
             reproduce.setAlive(true);
             reproduce.setTargetMatrix(getTargetMatrix());
             return reproduce;

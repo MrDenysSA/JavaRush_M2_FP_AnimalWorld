@@ -11,5 +11,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 public abstract class Organism implements Reproducile {
-    private int     maxAmount;
+    private String icon;
+    private int weight;
+    private int maxAmount; // Максимальна кількість створінь в кілтинці
+    private boolean isAlive = true;
 }

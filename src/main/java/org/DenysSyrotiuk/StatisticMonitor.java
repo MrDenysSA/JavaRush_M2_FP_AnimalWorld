@@ -4,7 +4,6 @@ import org.DenysSyrotiuk.map.GameField;
 
 public class StatisticMonitor {
     private int countDey = 1;
-
     public void view(GameField gameField) {
         System.out.println("***********************");
         System.out.println("Dey №: " + countDey);
@@ -16,5 +15,7 @@ public class StatisticMonitor {
             System.out.println("");
         }
         System.out.println("***********************");
+        countDey++;
     }
+
 }

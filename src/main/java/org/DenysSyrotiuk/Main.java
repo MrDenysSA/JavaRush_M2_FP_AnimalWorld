@@ -12,7 +12,6 @@ public class Main {
 
 /*        Wolf wolf = new Wolf();
         wolf.setIcon("\uD83D\uDC3A");
-        wolf.setMaxWeight(50);
         wolf.setWeight(50);
         wolf.setMaxAmount(30);
         wolf.setSpeed(3);
@@ -21,7 +20,6 @@ public class Main {
 
         Rabbit rabbit = new Rabbit();
         rabbit.setIcon("\uD83D\uDC07");
-        rabbit.setMaxWeight(2);
         rabbit.setWeight(2);
         rabbit.setMaxAmount(150);
         rabbit.setSpeed(2);
@@ -29,7 +27,7 @@ public class Main {
         rabbit.targetMatrix.put(Daisy.class,100);
         rabbit.targetMatrix.put(Fern.class,100);
 
-        System.out.println(rabbit.getClass().getSuperclass().getSimpleName().toLowerCase());
+//        System.out.println(rabbit.getClass().getSuperclass().getSimpleName().toLowerCase());
 
         SerializationYaml serializationYaml = new SerializationYaml();
 

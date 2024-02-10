@@ -12,7 +12,7 @@ public class Daisy extends Plant {
         Daisy reproduce = new Daisy();
         reproduce.setIcon(getIcon());
         reproduce.setMaxAmount(getMaxAmount());
-        reproduce.setMaxWeight(getMaxWeight());
+        reproduce.setWeight(getWeight());
         return reproduce;
     }
 }

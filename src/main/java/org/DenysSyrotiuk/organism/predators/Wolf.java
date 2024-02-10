@@ -22,7 +22,7 @@ public class Wolf extends Predator {
         Wolf reproduce = new Wolf();
         reproduce.setCell(getCell());
         reproduce.setIcon(getIcon());
-        reproduce.setMaxWeight(getMaxWeight());
+//        reproduce.setMaxWeight(getMaxWeight());
         reproduce.setWeight(getWeight());
         reproduce.setMaxAmount(getMaxAmount());
         reproduce.setSpeed(getSpeed());
