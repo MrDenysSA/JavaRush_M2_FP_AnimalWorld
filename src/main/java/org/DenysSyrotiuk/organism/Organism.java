@@ -14,5 +14,5 @@ public abstract class Organism implements Reproducile {
     private String icon;
     private int weight;
     private int maxAmount; // Максимальна кількість створінь в кілтинці
-    private boolean isAlive = true;
+    private boolean isAlive;
 }

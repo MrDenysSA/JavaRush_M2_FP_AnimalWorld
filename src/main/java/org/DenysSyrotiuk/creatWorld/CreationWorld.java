@@ -93,17 +93,17 @@ public class CreationWorld {
             Map<Type, Set<? extends Organism>> CopyResidents = new HashMap<>(gameField.cells[i].residents);
 
 //            gameField.cells[i].residents.forEach((type, organisms) -> organisms.stream().filter(o -> !o.isAlive() || o instanceof Animal).collect(Collectors.toMap()));
-//
-            CopyResidents.forEach((type, organisms) -> {
-                if (organisms instanceof Animal) {
-                    for (Organism organism : organisms) {
-                        if (!organism.isAlive()) {
-                            gameField.cells[count].residents.forEach((type1, organisms1) -> organisms1.remove(organism));
-//                            organisms.remove(type, organism);
-                        }
-                    }
-                }
 
+            CopyResidents.forEach((type, organisms) -> {
+                    for (Organism organism : organisms) {
+                            if (organism instanceof Animal) {
+                                if (!organism.isAlive()) {
+
+                                    gameField.cells[count].residents.remove(type,organism);
+
+                                }
+                            }
+                        }
             });
 
 
