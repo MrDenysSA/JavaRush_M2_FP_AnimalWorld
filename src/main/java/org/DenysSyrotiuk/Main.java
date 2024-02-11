@@ -24,6 +24,7 @@ public class Main {
         rabbit.setMaxAmount(150);
         rabbit.setSpeed(2);
         rabbit.setMaxFood(0.45);
+        rabbit.setHunger(0.0);
         rabbit.targetMatrix.put(Daisy.class,100);
         rabbit.targetMatrix.put(Fern.class,100);
 

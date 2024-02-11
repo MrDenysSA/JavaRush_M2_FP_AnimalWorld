@@ -1,6 +1,6 @@
 ---
 icon: "🐺"
-weight: 50
+weight: 50.0
 maxAmount: 30
 speed: 3
 maxFood: 8.0

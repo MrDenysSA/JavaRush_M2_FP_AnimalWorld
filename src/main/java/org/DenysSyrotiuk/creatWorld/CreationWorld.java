@@ -25,6 +25,8 @@ public class CreationWorld {
         addPlantsToGameField(); //ПРАЦЮЄ  Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
         new StatisticMonitor().view(gameField);
         eatAnimal();
+        regenerationPlants();
+        removeDead();
         new StatisticMonitor().view(gameField);
         System.out.println("Hia");
     }
@@ -78,39 +80,54 @@ public class CreationWorld {
 
     private void eatAnimal() {
         for (int i = 0; i < gameField.cells.length; i++) {
-            int count = i;
+            int countSell = i;
 
             gameField.cells[i].residents.forEach((type, organisms) -> {
                 for (Organism organism : organisms) {
                     if (organism instanceof Animal) {
                         if (organism.isAlive()) {
-                            ((Animal) organism).eat(gameField.cells[count].residents);
+                            ((Animal) organism).eat(gameField.cells[countSell].residents);
                         }
                     }
                 }
             });
-
-            Map<Type, Set<? extends Organism>> CopyResidents = new HashMap<>(gameField.cells[i].residents);
-
-//            gameField.cells[i].residents.forEach((type, organisms) -> organisms.stream().filter(o -> !o.isAlive() || o instanceof Animal).collect(Collectors.toMap()));
-
-            CopyResidents.forEach((type, organisms) -> {
-                    for (Organism organism : organisms) {
-                            if (organism instanceof Animal) {
-                                if (!organism.isAlive()) {
-
-                                    gameField.cells[count].residents.forEach((t,o) ->o.remove(organism));
-
-                                }
-                            }
-                        }
-            });
-
-
         }
 
+    }
 
-        System.out.println("Hia");
+    private void regenerationPlants() {
+        for (int i = 0; i < gameField.cells.length; i++) {
+            gameField.cells[i].residents.forEach((type, organisms) -> {
+                for (Organism organism : organisms) {
+                    if (organism instanceof Plant) {
+                        if (!organism.isAlive()) {
+                            organism.setAlive(true);
+//                            System.out.println("Відродилась рослинка: " + organism.getIcon());
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private void removeDead() {
+        System.out.println("Dead animals: ");
+
+        Map<Type, Set<? extends Organism>> removeDeadMap = new HashMap<>();
+
+        for (int i = 0; i < gameField.cells.length; i++) {
+            gameField.cells[i].residents.forEach((type, organisms) -> {
+                Set<? extends Organism> list = organisms.stream()
+                        .filter(organism -> !organism.isAlive())
+                        .collect(Collectors.toSet());
+
+                list.forEach(organism -> {
+                    removeDeadMap.put(organism.getClass(),list);
+                    organisms.remove(organism);
+                });
+            });
+            new StatisticMonitor().deadAnimals(removeDeadMap, i);
+        }
     }
 
     @Override

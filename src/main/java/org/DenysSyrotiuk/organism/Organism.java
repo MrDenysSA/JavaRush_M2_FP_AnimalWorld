@@ -12,7 +12,7 @@ import java.io.Serializable;
 @ToString
 public abstract class Organism implements Reproducile {
     private String icon;
-    private int weight;
+    private double weight;
     private int maxAmount; // Максимальна кількість створінь в кілтинці
-    private boolean isAlive;
+    private boolean isAlive = true;
 }
