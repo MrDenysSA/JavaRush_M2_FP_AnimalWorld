@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.DenysSyrotiuk.actionsOrganism.Eat;
 import org.DenysSyrotiuk.actionsOrganism.Movable;
+import org.DenysSyrotiuk.actionsOrganism.Reproducile;
 import org.DenysSyrotiuk.map.Cell;
 
 import java.lang.reflect.Type;
@@ -12,7 +13,7 @@ import java.util.*;
 @Getter
 @Setter
 @ToString
-public abstract class Animal extends Organism implements Movable, Eat {
+public abstract class Animal extends Organism implements Movable, Eat, Reproducile {
     private int speed;
     private double maxFood;      // Скільки кілограмів їжі потрібно тварині для повного насичення
     private double hunger = 0.0; // Голод
@@ -22,7 +23,7 @@ public abstract class Animal extends Organism implements Movable, Eat {
     @JsonIgnore
     private Cell cell;
 
-    public Map<Type, Set<? extends Organism>> eat(Map<Type, Set<? extends Organism>> residents) {
+    public void eat(Map<Type, Set<? extends Organism>> residents) {
         Random random = new Random();
 
         targetMatrix.forEach((aClass, integer) -> {
@@ -41,7 +42,6 @@ public abstract class Animal extends Organism implements Movable, Eat {
                 }
             });
         });
-
-        return residents;
     }
+
 }

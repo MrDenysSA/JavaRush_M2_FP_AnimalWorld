@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CreationWorld {
     private SerializationYaml serializationYaml = new SerializationYaml();
@@ -23,11 +24,14 @@ public class CreationWorld {
         creteField(); //ПРАЦЮЄ. Десеріалізує GameField. ініціалізує пусті Cell.
         loadOrganisms(); //ПРАЦЮЄ. Десерівлізує Рослини до списку "deserializationOrganisms
         addPlantsToGameField(); //ПРАЦЮЄ  Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
-        new StatisticMonitor().view(gameField);
-        eatAnimal();
-        regenerationPlants();
-        removeDead();
-        new StatisticMonitor().view(gameField);
+        new StatisticMonitor().view(gameField);//ПРАЦЮ
+
+/*        eatAnimal();//ПРАЦЮЄ
+        regenerationPlants();//ПРАЦЮЄ
+        removeDeadAnimals();//ПРАЦЮЄ*/
+
+        reproducile();
+        new StatisticMonitor().view(gameField);//ПРАЦЮЄ
         System.out.println("Hia");
     }
 
@@ -110,7 +114,7 @@ public class CreationWorld {
         }
     }
 
-    private void removeDead() {
+    private void removeDeadAnimals() {
         System.out.println("Dead animals: ");
 
         Map<Type, Set<? extends Organism>> removeDeadMap = new HashMap<>();
@@ -122,12 +126,73 @@ public class CreationWorld {
                         .collect(Collectors.toSet());
 
                 list.forEach(organism -> {
-                    removeDeadMap.put(organism.getClass(),list);
+                    removeDeadMap.put(organism.getClass(), list);
                     organisms.remove(organism);
                 });
             });
             new StatisticMonitor().deadAnimals(removeDeadMap, i);
         }
+    }
+
+    private void moveAnimals() {
+
+    }
+
+    private void reproducile() {
+        GameField gameNew = new GameField();
+        gameNew = serializationYaml.pull("src/main/resources/map/gameField.yaml", GameField.class);
+        gameNew.initializationCell();
+
+
+        for (int i = 0; i < gameField.cells.length; i++) {
+            Set<Type> types = gameField.cells[i].residents.keySet(); // Получаем список ключей (будем вытягивать списки за ключем)
+            Set<Type> setAnimalType = types.stream()
+                    .filter(type -> !type.getTypeName().startsWith("org.DenysSyrotiuk.organism.plants"))
+                    .collect(Collectors.toSet()); // Получаем список ключей животных (будем вытягивать списки за ключем)
+
+
+            Map<Type, Set<Organism>> residentsNew = new HashMap<>();
+
+            for (Type type : setAnimalType) {
+                Set<? extends Organism> organisms = gameField.cells[i].residents.get(type);
+
+                Set<Organism> setNewOrg = new HashSet<>();
+
+                int size = organisms.size();
+                int sizeNewAnimals = size % 2 == 0 || size > 1 ? size / 2 : 0;
+                int count = 0;
+                if (sizeNewAnimals > 0) {
+
+                    for (Organism organism : organisms) {
+                        if (count == sizeNewAnimals) {
+                            break;
+                        }
+                        Organism org = organism.reproduce();
+                        setNewOrg.add(org);
+                        count++;
+                    }
+                    residentsNew.put(type, setNewOrg);
+                }
+
+                Stream<Organism> stream1 = organisms.stream().map(organism -> (Organism) organism);
+
+                Stream<Organism> stream = setNewOrg.stream();
+
+                Set<Organism> collect = Stream.concat(stream1, stream).collect(Collectors.toSet());
+
+
+                gameNew.cells[i].residents.put(collect.getClass(), collect);
+//                gameField.cells[i].residents.put(collect.getClass(), collect);
+//                gameField.cells[i].residents.get(collect.getClass()).add(collect);
+
+            }
+
+
+
+        }
+
+        System.out.println("reproducile");
+
     }
 
     @Override
