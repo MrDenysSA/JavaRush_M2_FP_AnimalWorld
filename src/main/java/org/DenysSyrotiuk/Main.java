@@ -10,13 +10,17 @@ import org.DenysSyrotiuk.organism.plants.Fern;
 public class Main {
     public static void main(String[] args) {
 
-/*        Wolf wolf = new Wolf();
-        wolf.setIcon("\uD83D\uDC3A");
-        wolf.setWeight(50);
-        wolf.setMaxAmount(30);
-        wolf.setSpeed(3);
-        wolf.setMaxFood(8);
-        wolf.targetMatrix.put(Rabbit.class,60);
+/*        Daisy daisy = new Daisy();
+        daisy.setIcon("🌼");
+        daisy.setWeight(1.5);
+        daisy.setMaxAmount(88);
+        daisy.setAlive(true);
+
+        Fern fern = new Fern();
+        fern.setIcon("🌿");
+        fern.setWeight(1);
+        fern.setMaxAmount(99);
+        fern.setAlive(true);
 
         Rabbit rabbit = new Rabbit();
         rabbit.setIcon("\uD83D\uDC07");
@@ -25,20 +29,27 @@ public class Main {
         rabbit.setSpeed(2);
         rabbit.setMaxFood(0.45);
         rabbit.setHunger(0.0);
-        rabbit.targetMatrix.put(Daisy.class,100);
+        rabbit.targetMatrix.put(daisy.getClass(),100);
         rabbit.targetMatrix.put(Fern.class,100);
 
-//        System.out.println(rabbit.getClass().getSuperclass().getSimpleName().toLowerCase());
+        Wolf wolf = new Wolf();
+        wolf.setIcon("\uD83D\uDC3A");
+        wolf.setWeight(50);
+        wolf.setMaxAmount(30);
+        wolf.setSpeed(3);
+        wolf.setMaxFood(8);
+        wolf.targetMatrix.put(Rabbit.class,60);
 
         SerializationYaml serializationYaml = new SerializationYaml();
-
-        serializationYaml.pushOrganism(wolf);
-        serializationYaml.pushOrganism(rabbit);*/
+        serializationYaml.pushOrganism(daisy);
+        serializationYaml.pushOrganism(fern);
+        serializationYaml.pushOrganism(rabbit);
+        serializationYaml.pushOrganism(wolf);*/
 
 
         CreationWorld world = new CreationWorld();
 
 
-        System.out.println("FIN");
+        System.out.println("Fin Main Class");
     }
 }

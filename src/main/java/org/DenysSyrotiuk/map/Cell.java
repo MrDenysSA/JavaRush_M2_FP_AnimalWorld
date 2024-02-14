@@ -17,7 +17,7 @@ public class Cell {
 
     private final long UID = serialUID++;
 
-    public Map<Type, Set<? extends Organism>> residents = new HashMap<>();
+    public Map<Type, Set<Organism>> residents = new HashMap<>();
     public Cell(){
     }
 

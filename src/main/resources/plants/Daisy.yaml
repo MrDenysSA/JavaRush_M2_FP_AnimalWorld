@@ -1,4 +1,5 @@
 ---
 icon: "🌼"
 weight: 1.5
-maxAmount: 100
+maxAmount: 88
+alive: true

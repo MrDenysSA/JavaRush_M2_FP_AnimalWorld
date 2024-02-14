@@ -26,13 +26,12 @@ public class StatisticMonitor {
         countDey++;
     }
 
-    public void deadAnimals(Map<Type, Set<? extends Organism>> removeDeadMap, int i) {
-        System.out.println("Sell №: " + i);
+    public void deadAnimals(Map<Type, Set<Organism>> removeDeadMap, int i, String nameMethod) {
+        System.out.println("Sell №: " + i + " " + nameMethod);
         removeDeadMap.forEach((type, organisms) -> {
             System.out.println(type.getTypeName()
                     .substring(type.getTypeName().indexOf("organism") + 9) + ": " + organisms.size());
         });
-
     }
 
 }

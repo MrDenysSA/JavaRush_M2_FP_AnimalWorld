@@ -23,11 +23,11 @@ public abstract class Animal extends Organism implements Movable, Eat, Reproduci
     @JsonIgnore
     private Cell cell;
 
-    public void eat(Map<Type, Set<? extends Organism>> residents) {
+    public void eat(Map<Type, Set<Organism>> residents) {
         Random random = new Random();
 
         targetMatrix.forEach((aClass, integer) -> {
-            Set<? extends Organism> organisms = residents.get(aClass);
+            Set<Organism> organisms = residents.get(aClass);
             organisms.forEach(org -> {
                 if (hunger < getMaxFood()) { // если наше животное голодное, то ищем жертву
                     if (org.isAlive()) {    // Ищем жертву среди живых
