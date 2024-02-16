@@ -15,19 +15,23 @@ public class StatisticMonitor {
         System.out.println("*********************** \n*********************** ");
         System.out.println("Dey №: " + countDey);
         for (int i = 0; i < gameField.cells.length; i++) {
-            System.out.println("Sell №: " + i);
-            gameField.cells[i].getResidents()
-                    .forEach((type, organisms) -> System.out.println(type.getTypeName()
-                            .substring(type.getTypeName().indexOf("organism") + 9)
-                            + ": "
-                            + organisms.size()));
+            for (int j = 0; j < gameField.cells[i].length; j++) {
+
+
+                System.out.println("Sell №: " + i + "_" + j);
+                gameField.cells[i][j].getResidents()
+                        .forEach((type, organisms) -> System.out.println(type.getTypeName()
+                                .substring(type.getTypeName().indexOf("organism") + 9)
+                                + ": "
+                                + organisms.size()));
+            }
         }
         System.out.println("***********************");
         countDey++;
     }
 
-    public void deadAnimals(Map<Type, Set<Organism>> removeDeadMap, int i, String nameMethod) {
-        System.out.println("Sell №: " + i + " " + nameMethod);
+    public void deadAnimals(Map<Type, Set<Organism>> removeDeadMap, int i, int j, String nameMethod) {
+        System.out.println("Sell №: " + i + "_" + j + " " + nameMethod);
         removeDeadMap.forEach((type, organisms) -> {
             System.out.println(type.getTypeName()
                     .substring(type.getTypeName().indexOf("organism") + 9) + ": " + organisms.size());

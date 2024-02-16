@@ -9,7 +9,7 @@ public class Rabbit extends Herbivore {
     @JsonIgnore
     private final long UID = serialUID++;
     @Override
-    public void move() {
+    public void eat() {
 
     }
 
@@ -26,5 +26,10 @@ public class Rabbit extends Herbivore {
             reproduce.setAlive(true);
             reproduce.setTargetMatrix(getTargetMatrix());
             return reproduce;
+    }
+
+    @Override
+    public void move() {
+
     }
 }

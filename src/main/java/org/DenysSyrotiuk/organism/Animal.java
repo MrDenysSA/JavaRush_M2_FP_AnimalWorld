@@ -44,4 +44,8 @@ public abstract class Animal extends Organism implements Movable, Eat, Reproduci
         });
     }
 
+    public void move(){
+
+    }
+
 }

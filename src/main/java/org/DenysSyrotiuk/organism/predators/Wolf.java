@@ -12,10 +12,7 @@ public class Wolf extends Predator {
     private static long serialUID = 1L;
     @JsonIgnore
     private final long UID = serialUID++;
-    @Override
-    public void move() {
 
-    }
 
     @Override
     public Wolf reproduce() {
@@ -30,5 +27,15 @@ public class Wolf extends Predator {
         reproduce.setAlive(true);
         reproduce.setTargetMatrix(getTargetMatrix());
         return reproduce;
+    }
+
+    @Override
+    public void move() {
+
+    }
+
+    @Override
+    public void eat() {
+
     }
 }
