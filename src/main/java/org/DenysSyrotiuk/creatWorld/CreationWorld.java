@@ -27,12 +27,14 @@ public class CreationWorld {
         addOrganismsToGameField(); //ПРАЦЮЄ  Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
         loadNextSellsFoMoveAnimals();//ПРАЦЮЄ
 
-        new StatisticMonitor().view(gameField);//ПРАЦЮ
+        new StatisticMonitor().view(gameField);//ПРАЦЮЄ
+        moveAnimals();//ПРАЦЮЄ
 
-        eatAnimal();//ПРАЦЮЄ
-        removeDeadAnimals();//ПРАЦЮЄ
-        reproduceAnimals(); //ПРАЦЮЄ
-        regenerationPlants();//ПРАЦЮЄ
+
+//        eatAnimal();//ПРАЦЮЄ
+//        removeDeadAnimals();//ПРАЦЮЄ
+//        reproduceAnimals(); //ПРАЦЮЄ
+//        regenerationPlants();//ПРАЦЮЄ
 //        moveAnimals();
 
 
@@ -244,31 +246,35 @@ public class CreationWorld {
     private void moveAnimals() {
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
+                int yCoordSell = i;
+                int xCoordSell = j;
 
-                int countSellI = i;
-                int countSellJ = j;
                 gameField.cells[i][j].getResidents().forEach((type, organisms) -> {
-                            Set<Organism> setOrg = organisms.stream()
-                                    .filter(Animal.class::isInstance)
-                                    .collect(Collectors.toSet());
+                    Set<Organism> setOrg = organisms.stream()
+                            .filter(Animal.class::isInstance)
+                            .collect(Collectors.toSet());
 
-                            setOrg.forEach(organism -> {
-                                int rand = random.nextInt(((Animal) organism).getSpeed());
-                                int x = 0;
-                                int y = 0;
-                                if (rand >= gameField.cells.length) {
-                                    x = gameField.cells.length - 1;
-                                }
-                                gameField.cells[x][y].getResidents().get(organism.getClass()).add(organism);
-                                //                        Set<Organism> list = new HashSet<>();
-                                //                        list.add(organism);
-                                organisms.remove(organism);
-                            });
+                    setOrg.forEach(organism -> {
+                        int stepSize = random.nextInt(((Animal) organism).getSpeed());
+                        int count = 0;
+                        int x = xCoordSell;
+                        int y = yCoordSell;
+
+                        while (stepSize > count) {
+                            count++;
+                            Set<Integer> intKayWaySet = gameField.getCells()[y][x].getNextSellMap().keySet();
+                            Integer randomWay = intKayWaySet.stream().skip(random.nextInt(intKayWaySet.size())).findFirst().get();
+                            int[] coordinate = gameField.getCells()[y][x].getNextSellMap().get(randomWay);
+                            y = coordinate[0];
+                            x = coordinate[1];
+
+                            gameField.getCells()[y][x].getResidents().get(organism.getClass()).add(organism);
+                            organisms.remove(organism);
                         }
-                );
+                    });
+                });
             }
         }
-        System.out.println("Hia");
     }
 
     @Override
