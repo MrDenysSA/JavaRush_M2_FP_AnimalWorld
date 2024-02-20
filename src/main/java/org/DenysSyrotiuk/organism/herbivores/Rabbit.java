@@ -8,28 +8,28 @@ public class Rabbit extends Herbivore {
     private static long serialUID = 1L;
     @JsonIgnore
     private final long UID = serialUID++;
-    @Override
-    public void eat() {
-
-    }
 
     @Override
     public Rabbit reproduce() {
-            Rabbit reproduce = new Rabbit();
-            reproduce.setCell(getCell());
-            reproduce.setIcon(getIcon());
-            reproduce.setMaxFood(getMaxFood());
-            reproduce.setWeight(getWeight());
-            reproduce.setMaxAmount(getMaxAmount());
-            reproduce.setSpeed(getSpeed());
-//            reproduce.setMaxFood(getMaxFood());
-            reproduce.setAlive(true);
-            reproduce.setTargetMatrix(getTargetMatrix());
-            return reproduce;
+        Rabbit rabbit = new Rabbit();
+
+        rabbit.setIcon(getIcon());
+        rabbit.setWeight(getWeight());
+        rabbit.setMaxAmount(getMaxAmount());
+        rabbit.setAlive(true);
+
+        rabbit.setSpeed(getSpeed());
+        rabbit.setMaxFoodForSaturation(getMaxFoodForSaturation());
+        rabbit.setTargetMatrix(getTargetMatrix());
+
+        return rabbit;
+    }
+
+    @Override
+    public void eat() {
     }
 
     @Override
     public void move() {
-
     }
 }

@@ -1,5 +1,6 @@
 package org.DenysSyrotiuk.creatWorld;
 
+import lombok.Getter;
 import org.DenysSyrotiuk.StatisticMonitor;
 import org.DenysSyrotiuk.map.GameField;
 import org.DenysSyrotiuk.organism.Animal;
@@ -15,31 +16,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CreationWorld {
-    private SerializationYaml serializationYaml = new SerializationYaml();
-    private Map<Type, Organism> deserializationOrganisms = new HashMap<>();
-    public GameField gameField;
-
     public Random random = new Random();
+    private final SerializationYaml serializationYaml = new SerializationYaml();
+    private final Map<Type, Organism> deserializationOrganisms = new HashMap<>();
+    @Getter
+    private GameField gameField;
 
-    public CreationWorld() {
-        creteField(); //ПРАЦЮЄ. Десеріалізує GameField. ініціалізує пусті Cell.
-        loadOrganisms(); //ПРАЦЮЄ. Десерівлізує Рослини до списку "deserializationOrganisms
-        addOrganismsToGameField(); //ПРАЦЮЄ  Із списка deserializationOrganisms наповнюємо рандомно наш ГеймСвіт
-        loadNextSellsFoMoveAnimals();//ПРАЦЮЄ
-
-        new StatisticMonitor().view(gameField);//ПРАЦЮЄ
-        moveAnimals();//ПРАЦЮЄ
-
-
-//        eatAnimal();//ПРАЦЮЄ
-//        removeDeadAnimals();//ПРАЦЮЄ
-//        reproduceAnimals(); //ПРАЦЮЄ
-//        regenerationPlants();//ПРАЦЮЄ
-//        moveAnimals();
-
-
-        new StatisticMonitor().view(gameField);//ПРАЦЮЄ
-        System.out.println("Hia");
+    public CreationWorld(GameField gameField){
+        creteField();
+        loadOrganisms();
+        addOrganismsToGameField();
+        loadNextSellsFoMoveAnimals();
     }
 
     private void creteField() {
@@ -140,6 +127,8 @@ public class CreationWorld {
         }
     }
 
+
+/*// Рефактор в GameEngin
     private void eatAnimal() {
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
@@ -155,7 +144,6 @@ public class CreationWorld {
             }
         }
     }
-
     private void regenerationPlants() {
         Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
         for (int i = 0; i < gameField.getCells().length; i++) {
@@ -178,7 +166,6 @@ public class CreationWorld {
         }
         System.out.println("");
     }
-
     private void removeDeadAnimals() {
         Map<Type, Set<Organism>> removeDeadMap = new HashMap<>();
         for (int i = 0; i < gameField.cells.length; i++) {
@@ -200,7 +187,6 @@ public class CreationWorld {
         }
         System.out.println("");
     }
-
     private void reproduceAnimals() {
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
@@ -242,7 +228,6 @@ public class CreationWorld {
         }
         System.out.println("");
     }
-
     private void moveAnimals() {
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
@@ -275,7 +260,7 @@ public class CreationWorld {
                 });
             }
         }
-    }
+    }*/
 
     @Override
     public String toString() {

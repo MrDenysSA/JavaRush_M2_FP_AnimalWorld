@@ -1,6 +1,7 @@
 package org.DenysSyrotiuk;
 
 import org.DenysSyrotiuk.creatWorld.CreationWorld;
+import org.DenysSyrotiuk.creatWorld.GameEngin;
 import org.DenysSyrotiuk.creatWorld.SerializationYaml;
 import org.DenysSyrotiuk.organism.herbivores.Rabbit;
 import org.DenysSyrotiuk.organism.predators.Wolf;
@@ -10,7 +11,7 @@ import org.DenysSyrotiuk.organism.plants.Fern;
 public class Main {
     public static void main(String[] args) {
 
-/*        Daisy daisy = new Daisy();
+        Daisy daisy = new Daisy();
         daisy.setIcon("🌼");
         daisy.setWeight(1.5);
         daisy.setMaxAmount(88);
@@ -27,7 +28,7 @@ public class Main {
         rabbit.setWeight(2);
         rabbit.setMaxAmount(150);
         rabbit.setSpeed(2);
-        rabbit.setMaxFood(0.45);
+        rabbit.setMaxFoodForSaturation(0.45);
         rabbit.setHunger(0.0);
         rabbit.targetMatrix.put(daisy.getClass(),100);
         rabbit.targetMatrix.put(Fern.class,100);
@@ -37,19 +38,20 @@ public class Main {
         wolf.setWeight(50);
         wolf.setMaxAmount(30);
         wolf.setSpeed(3);
-        wolf.setMaxFood(8);
+        wolf.setMaxFoodForSaturation(8);
         wolf.targetMatrix.put(Rabbit.class,60);
 
         SerializationYaml serializationYaml = new SerializationYaml();
         serializationYaml.pushOrganism(daisy);
         serializationYaml.pushOrganism(fern);
         serializationYaml.pushOrganism(rabbit);
-        serializationYaml.pushOrganism(wolf);*/
+        serializationYaml.pushOrganism(wolf);
+
+        GameEngin gameEngin = new GameEngin();
+        gameEngin.start();
 
 
-        CreationWorld world = new CreationWorld();
 
-
-        System.out.println("Fin Main Class");
+        System.out.println("Game Over");
     }
 }

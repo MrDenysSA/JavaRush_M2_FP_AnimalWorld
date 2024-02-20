@@ -9,11 +9,10 @@ import java.util.Optional;
 import java.util.Set;
 
 public class StatisticMonitor {
-    private static int countDey = 1;
 
-    public void view(GameField gameField) {
+    public void view(GameField gameField, Long day) {
         System.out.println("*********************** \n*********************** ");
-        System.out.println("Dey №: " + countDey);
+        System.out.println("Dey №: " + day + "\n");
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
 
@@ -27,7 +26,6 @@ public class StatisticMonitor {
             }
         }
         System.out.println("***********************");
-        countDey++;
     }
 
     public void deadAnimals(Map<Type, Set<Organism>> removeDeadMap, int i, int j, String nameMethod) {

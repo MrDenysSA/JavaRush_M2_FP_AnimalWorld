@@ -5,7 +5,6 @@ import lombok.*;
 import org.DenysSyrotiuk.actionsOrganism.Eat;
 import org.DenysSyrotiuk.actionsOrganism.Movable;
 import org.DenysSyrotiuk.actionsOrganism.Reproducile;
-import org.DenysSyrotiuk.map.Cell;
 
 import java.lang.reflect.Type;
 import java.util.*;
@@ -13,29 +12,30 @@ import java.util.*;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode(callSuper = true)
 public abstract class Animal extends Organism implements Movable, Eat, Reproducile {
-    private int speed;
-    private double maxFood;      // Скільки кілограмів їжі потрібно тварині для повного насичення
-    private double hunger = 0.0; // Голод
 
+    private int speed;
+    private double maxFoodForSaturation;
+    private double hunger;
     @Builder.Default
-    public Map<Class<? extends Organism>, Integer> targetMatrix = new HashMap<>(); // Список тварин яких можна їсти.
+    public Map<Class<? extends Organism>, Integer> targetMatrix = new HashMap<>();
+
     @JsonIgnore
-    private Cell cell;
+    private Random random = new Random();
 
     public void eat(Map<Type, Set<Organism>> residents) {
-        Random random = new Random();
 
-        targetMatrix.forEach((aClass, integer) -> {
-            Set<Organism> organisms = residents.get(aClass);
+        targetMatrix.forEach((targetClass, probabilityEating) -> {
+            Set<Organism> organisms = residents.get(targetClass);
             organisms.forEach(org -> {
-                if (hunger < getMaxFood()) { // если наше животное голодное, то ищем жертву
-                    if (org.isAlive()) {    // Ищем жертву среди живых
-                        if (integer == 100 || integer > random.nextInt(100)) { // если выполнилось условие, то догнали жертву
-                            org.setAlive(false); // убиваем животное
+                if (hunger < getMaxFoodForSaturation()) {
+                    if (org.isAlive()) {
+                        if (probabilityEating == 100 || probabilityEating > random.nextInt(100)) {
+                            org.setAlive(false);
                             setHunger(getHunger() + org.getWeight());
-                            if (hunger > maxFood) { // Щоб тваринка не переїдала.
-                                hunger = maxFood;
+                            if (hunger > maxFoodForSaturation) {
+                                hunger = maxFoodForSaturation;
                             }
                         }
                     }
@@ -44,8 +44,12 @@ public abstract class Animal extends Organism implements Movable, Eat, Reproduci
         });
     }
 
-    public void move(){
-
+    public void checkSurvivability(){
+        if (hunger > 0.0){
+            hunger = (hunger - (hunger/2));
+        } else {
+            setAlive(false);
+        }
     }
 
 }

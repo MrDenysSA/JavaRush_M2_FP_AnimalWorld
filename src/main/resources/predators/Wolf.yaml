@@ -3,7 +3,7 @@ icon: "🐺"
 weight: 50.0
 maxAmount: 30
 speed: 3
-maxFood: 8.0
+maxFoodForSaturation: 8.0
 hunger: 0.0
 targetMatrix:
   org.DenysSyrotiuk.organism.herbivores.Rabbit: 60
