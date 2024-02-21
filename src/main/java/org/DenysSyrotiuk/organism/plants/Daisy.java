@@ -5,6 +5,7 @@ import org.DenysSyrotiuk.organism.Plant;
 public class Daisy extends Plant {
     @Override
     public Daisy reproduce() {
+
         Daisy daisy = new Daisy();
 
         daisy.setIcon(getIcon());

@@ -3,7 +3,7 @@ package org.DenysSyrotiuk.creatWorld;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import org.DenysSyrotiuk.StatisticMonitor;
+import org.DenysSyrotiuk.vievStatistics.StatisticMonitor;
 import org.DenysSyrotiuk.map.GameField;
 import org.DenysSyrotiuk.organism.Animal;
 import org.DenysSyrotiuk.organism.Organism;
@@ -25,8 +25,7 @@ public class GameEngin {
 
     public GameEngin() {
         if (gameField == null) {
-            GameField gameField = new GameField();
-            CreationWorld creationWorld = new CreationWorld(gameField);
+            CreationWorld creationWorld = new CreationWorld();
             this.gameField = creationWorld.getGameField();
         }
     }
@@ -35,23 +34,17 @@ public class GameEngin {
     public void start() {
 
         while (gamePlay) {
-
             statisticMonitor.view(gameField, day);
 
-            eatAnimal();
-
-            removeDeadAnimals();// обязатльно нужно удалить дохлых перед размножением
-            reproduceAnimals();
-//            moveAnimals();
+            eatAnimal(); // №1
+            removeDeadAnimals();// №2 обязатльно нужно удалить дохлых перед размножением
+            reproduceAnimals(); // №3
+            moveAnimals(); // №4 могут умереть при ходах.
 
             regenerationPlants();
-
             checkTheEndGame();
 
             day++;
-
-            System.out.println("Hi");
-
 //            Thread.sleep(500);
         }
     }
@@ -73,9 +66,6 @@ public class GameEngin {
     }
 
     private void reproduceAnimals() {
-
-
-
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
 
@@ -124,7 +114,7 @@ public class GameEngin {
                     gameField.cells[countSellIndexI][countSellIndexJ].residents.get(organism.getClass()).add(organism);
                 }));
 
-                statisticMonitor.deadAnimals(residentsNew, countSellIndexI, countSellIndexJ, "Reproduce animals");
+                statisticMonitor.deadAnimals(residentsNew, countSellIndexI, countSellIndexJ, "Reproduce animals", "ANSI_GREEN");
             }
         }
         System.out.println("");
@@ -147,7 +137,7 @@ public class GameEngin {
                         }
                     }
                 });
-                statisticMonitor.deadAnimals(regenerationPlantsMap, i, j, "Regeneration Plants");
+                statisticMonitor.deadAnimals(regenerationPlantsMap, i, j, "Regeneration Plants", "ANSI_GREEN");
             }
         }
         System.out.println("");
@@ -169,7 +159,7 @@ public class GameEngin {
                         organisms.remove(organism);
                     });
                 });
-                statisticMonitor.deadAnimals(removeDeadMap, i, j, "Dead animals");
+                statisticMonitor.deadAnimals(removeDeadMap, i, j, "Dead animals", "ANSI_RED");
             }
         }
         System.out.println("");
@@ -181,8 +171,8 @@ public class GameEngin {
                 int yCoordSell = i;
                 int xCoordSell = j;
 
-                gameField.cells[i][j].getResidents().forEach((type, organisms) -> {
-                    Set<Organism> setOrg = organisms.stream()
+                gameField.cells[i][j].getResidents().forEach((type, organismsS) -> {
+                    Set<Organism> setOrg = organismsS.stream()
                             .filter(Organism::isAlive)
                             .filter(Animal.class::isInstance)
                             .collect(Collectors.toSet());
@@ -190,22 +180,36 @@ public class GameEngin {
                     setOrg.forEach(organism -> {
                         int stepSize = random.nextInt(((Animal) organism).getSpeed());
 
+                        int yOld = yCoordSell;
+                        int xOld = xCoordSell;
+
                         int count = 0;
-                        int x = xCoordSell;
-                        int y = yCoordSell;
+                        int yNew = yCoordSell;
+                        int xNew = xCoordSell;
 
                         while (stepSize > count) {
                             count++;
-                            ((Animal) organism).checkSurvivability();
-                            if (organism.isAlive()) {
-                                Set<Integer> intKayWaySet = gameField.getCells()[y][x].getNextSellMap().keySet();
-                                Integer randomWay = intKayWaySet.stream().skip(random.nextInt(intKayWaySet.size())).findFirst().get();
-                                int[] coordinate = gameField.getCells()[y][x].getNextSellMap().get(randomWay);
-                                y = coordinate[0];
-                                x = coordinate[1];
 
-                                gameField.getCells()[y][x].getResidents().get(organism.getClass()).add(organism);
-                                organisms.remove(organism);
+                            if (organism.isAlive()) {
+                                Set<Integer> intKayWaySet = gameField.getCells()[yNew][xNew].getNextSellMap().keySet();
+                                Integer randomWay = intKayWaySet.stream().skip(random.nextInt(intKayWaySet.size())).findFirst().get();
+                                int[] coordinate = gameField.getCells()[yNew][xNew].getNextSellMap().get(randomWay);
+                                yNew = coordinate[0];
+                                xNew = coordinate[1];
+
+                                int size = gameField.getCells()[yNew][xNew].getResidents().get(organism.getClass()).size();
+                                if (organism.getMaxAmount() > size) {
+                                    ((Animal) organism).checkSurvivability();
+                                    boolean add = gameField.getCells()[yNew][xNew].getResidents().get(organism.getClass()).add(organism);
+                                    boolean remove = gameField.getCells()[yOld][xOld].getResidents().get(organism.getClass()).remove(organism);
+                                    yOld = yNew;
+                                    xOld = xNew;
+/*                                    System.out.println("Organizm: " + organism.getIcon() + " " + organism.hashCode() + "\n"
+                                            + "ADD done?: " + add + "\n"
+                                            + "ADD y: " + yNew + "; x " + xNew + "\n"
+                                            + "remove done?: " + remove + "\n"
+                                            + "remove y: " + yOld + "; x " + xOld + "\n");*/
+                                }
                             }
                         }
                     });
@@ -226,7 +230,8 @@ public class GameEngin {
                         .collect(Collectors.toSet());
 
                 for (Type type : setAnimalType) {
-                    boolean isAliveOrganism = getGameField().getCells()[i][j].getResidents().get(type).stream().anyMatch(Organism::isAlive);
+                    boolean isAliveOrganism = getGameField().getCells()[i][j]
+                            .getResidents().get(type).stream().anyMatch(Organism::isAlive);
                     if (isAliveOrganism) {
                         ruzzltat = true;
                         break;

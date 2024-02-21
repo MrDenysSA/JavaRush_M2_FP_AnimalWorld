@@ -11,13 +11,12 @@ import java.util.*;
 
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 public abstract class Animal extends Organism implements Movable, Eat, Reproducile {
 
     private int speed;
     private double maxFoodForSaturation;
     private double hunger;
+
     @Builder.Default
     public Map<Class<? extends Organism>, Integer> targetMatrix = new HashMap<>();
 
@@ -44,9 +43,9 @@ public abstract class Animal extends Organism implements Movable, Eat, Reproduci
         });
     }
 
-    public void checkSurvivability(){
-        if (hunger > 0.0){
-            hunger = (hunger - (hunger/2));
+    public void checkSurvivability() {
+        if (hunger > 0.0) {
+            hunger = hunger - Math.ceil(hunger / 4);
         } else {
             setAlive(false);
         }
