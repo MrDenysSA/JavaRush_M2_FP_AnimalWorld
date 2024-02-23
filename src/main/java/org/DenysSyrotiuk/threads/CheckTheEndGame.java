@@ -1,4 +1,4 @@
-package org.DenysSyrotiuk;
+package org.DenysSyrotiuk.threads;
 
 import lombok.Getter;
 import lombok.Setter;

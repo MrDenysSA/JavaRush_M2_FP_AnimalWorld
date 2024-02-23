@@ -1,14 +1,9 @@
 package org.DenysSyrotiuk;
 
 import org.DenysSyrotiuk.creatWorld.GameEngin;
-import org.DenysSyrotiuk.creatWorld.SerializationYaml;
-import org.DenysSyrotiuk.organism.herbivores.Rabbit;
-import org.DenysSyrotiuk.organism.predators.Wolf;
-import org.DenysSyrotiuk.organism.plants.Daisy;
-import org.DenysSyrotiuk.organism.plants.Fern;
-
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import org.DenysSyrotiuk.threads.AnimalsPlay;
+import org.DenysSyrotiuk.threads.CheckTheEndGame;
+import org.DenysSyrotiuk.threads.RegenerationPlants;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

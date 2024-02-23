@@ -1,4 +1,4 @@
-package org.DenysSyrotiuk;
+package org.DenysSyrotiuk.threads;
 
 import org.DenysSyrotiuk.creatWorld.GameEngin;
 import org.DenysSyrotiuk.vievStatistics.StatisticMonitor;

@@ -30,9 +30,7 @@ public class GameEngin {
         }
     }
 
-    /**
-     * For single Thread (from Main)
-     */
+    /** For single Thread (from Main) */
     public void start() {
         while (gamePlay) {
             statisticMonitor.view(gameField, day);
@@ -209,10 +207,7 @@ public class GameEngin {
         }
     }
 
-
-    /**
-     * Thread RegenerationPlants
-     */
+    /** Thread RegenerationPlants*/
     public synchronized void regenerationPlants() {
         Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
         for (int i = 0; i < gameField.getCells().length; i++) {
@@ -236,9 +231,7 @@ public class GameEngin {
         System.out.println("");
     }
 
-    /**
-     * Thread threadCheckTheEndGame
-     */
+    /** Thread threadCheckTheEndGame*/
     public synchronized void checkTheEndGame() {
         boolean ruzzltat = false;
 
@@ -270,7 +263,6 @@ public class GameEngin {
             gamePlay = false;
         }
     }
-
 
     @Override
     public String toString() {
