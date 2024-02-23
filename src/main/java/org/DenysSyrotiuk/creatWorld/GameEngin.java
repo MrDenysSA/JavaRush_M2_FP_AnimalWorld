@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class GameEngin {
-    private GameField gameField;
-    private boolean gamePlay = true;
+    public volatile boolean gamePlay = true;
     private Long day = 0L;
+    private volatile GameField gameField;
 
     Random random = new Random();
     StatisticMonitor statisticMonitor = new StatisticMonitor();
@@ -30,22 +30,36 @@ public class GameEngin {
         }
     }
 
-    @SneakyThrows
+    /**
+     * For single Thread (from Main)
+     */
     public void start() {
-
         while (gamePlay) {
             statisticMonitor.view(gameField, day);
-
             eatAnimal(); // №1
             removeDeadAnimals();// №2 обязатльно нужно удалить дохлых перед размножением
             reproduceAnimals(); // №3
             moveAnimals(); // №4 могут умереть при ходах.
 
-            regenerationPlants();
-            checkTheEndGame();
+            regenerationPlants(); // В треде
+            checkTheEndGame(); // В треде
 
             day++;
-//            Thread.sleep(500);
+        }
+    }
+
+    @SneakyThrows
+    public void animalPlay() {
+        while (gamePlay) {
+            synchronized (this) {
+                statisticMonitor.view(gameField, day);
+                eatAnimal();
+                removeDeadAnimals();
+                reproduceAnimals();
+                moveAnimals();
+                day++;
+            }
+            Thread.sleep(1);
         }
     }
 
@@ -115,29 +129,6 @@ public class GameEngin {
                 }));
 
                 statisticMonitor.deadAnimals(residentsNew, countSellIndexI, countSellIndexJ, "Reproduce animals", "ANSI_GREEN");
-            }
-        }
-        System.out.println("");
-    }
-
-    private void regenerationPlants() {
-        Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
-        for (int i = 0; i < gameField.getCells().length; i++) {
-            for (int j = 0; j < gameField.getCells()[i].length; j++) {
-
-                Set<Organism> setOrg = new HashSet<>();
-                gameField.cells[i][j].residents.forEach((type, organisms) -> {
-                    for (Organism organism : organisms) {
-                        if (organism instanceof Plant) {
-                            if (!organism.isAlive()) {
-                                organism.setAlive(true);
-                                setOrg.add(organism);
-                                regenerationPlantsMap.put(organism.getClass(), setOrg);
-                            }
-                        }
-                    }
-                });
-                statisticMonitor.deadAnimals(regenerationPlantsMap, i, j, "Regeneration Plants", "ANSI_GREEN");
             }
         }
         System.out.println("");
@@ -218,8 +209,37 @@ public class GameEngin {
         }
     }
 
-    private void checkTheEndGame() {
 
+    /**
+     * Thread RegenerationPlants
+     */
+    public synchronized void regenerationPlants() {
+        Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
+        for (int i = 0; i < gameField.getCells().length; i++) {
+            for (int j = 0; j < gameField.getCells()[i].length; j++) {
+
+                Set<Organism> setOrg = new HashSet<>();
+                gameField.cells[i][j].residents.forEach((type, organisms) -> {
+                    for (Organism organism : organisms) {
+                        if (organism instanceof Plant) {
+                            if (!organism.isAlive()) {
+                                organism.setAlive(true);
+                                setOrg.add(organism);
+                                regenerationPlantsMap.put(organism.getClass(), setOrg);
+                            }
+                        }
+                    }
+                });
+                statisticMonitor.deadAnimals(regenerationPlantsMap, i, j, "Regeneration Plants", "ANSI_GREEN");
+            }
+        }
+        System.out.println("");
+    }
+
+    /**
+     * Thread threadCheckTheEndGame
+     */
+    public synchronized void checkTheEndGame() {
         boolean ruzzltat = false;
 
         for (int i = 0; i < gameField.cells.length; i++) {
