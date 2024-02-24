@@ -1,7 +1,6 @@
 package org.DenysSyrotiuk.creatWorld;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import org.DenysSyrotiuk.vievStatistics.StatisticMonitor;
 import org.DenysSyrotiuk.map.GameField;
@@ -11,17 +10,16 @@ import org.DenysSyrotiuk.organism.Plant;
 
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
+
 public class GameEngin {
     public volatile boolean gamePlay = true;
     private Long day = 0L;
+    @Getter
     private volatile GameField gameField;
-
-    Random random = new Random();
-    StatisticMonitor statisticMonitor = new StatisticMonitor();
+    private final StatisticMonitor statisticMonitor = new StatisticMonitor();
 
     public GameEngin() {
         if (gameField == null) {
@@ -30,7 +28,9 @@ public class GameEngin {
         }
     }
 
-    /** For single Thread (from Main) */
+    /**
+     * For single Thread (from Main)
+     */
     public void start() {
         while (gamePlay) {
             statisticMonitor.view(gameField, day);
@@ -167,7 +167,7 @@ public class GameEngin {
                             .collect(Collectors.toSet());
 
                     setOrg.forEach(organism -> {
-                        int stepSize = random.nextInt(((Animal) organism).getSpeed());
+                        int stepSize = ThreadLocalRandom.current().nextInt((((Animal) organism).getSpeed()));
 
                         int yOld = yCoordSell;
                         int xOld = xCoordSell;
@@ -181,7 +181,9 @@ public class GameEngin {
 
                             if (organism.isAlive()) {
                                 Set<Integer> intKayWaySet = gameField.getCells()[yNew][xNew].getNextSellMap().keySet();
-                                Integer randomWay = intKayWaySet.stream().skip(random.nextInt(intKayWaySet.size())).findFirst().get();
+                                Integer randomWay = intKayWaySet.stream()
+                                        .skip(ThreadLocalRandom.current().nextInt((intKayWaySet.size())))
+                                        .findFirst().get();
                                 int[] coordinate = gameField.getCells()[yNew][xNew].getNextSellMap().get(randomWay);
                                 yNew = coordinate[0];
                                 xNew = coordinate[1];
@@ -207,7 +209,9 @@ public class GameEngin {
         }
     }
 
-    /** Thread RegenerationPlants*/
+    /**
+     * Thread RegenerationPlants
+     */
     public synchronized void regenerationPlants() {
         Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
         for (int i = 0; i < gameField.getCells().length; i++) {
@@ -231,7 +235,9 @@ public class GameEngin {
         System.out.println("");
     }
 
-    /** Thread threadCheckTheEndGame*/
+    /**
+     * Thread threadCheckTheEndGame
+     */
     public synchronized void checkTheEndGame() {
         boolean ruzzltat = false;
 

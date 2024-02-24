@@ -1,6 +1,11 @@
 package org.DenysSyrotiuk;
 
 import org.DenysSyrotiuk.creatWorld.GameEngin;
+import org.DenysSyrotiuk.creatWorld.SerializationYaml;
+import org.DenysSyrotiuk.organism.herbivores.Rabbit;
+import org.DenysSyrotiuk.organism.plants.Daisy;
+import org.DenysSyrotiuk.organism.plants.Fern;
+import org.DenysSyrotiuk.organism.predators.Wolf;
 import org.DenysSyrotiuk.threads.AnimalsPlay;
 import org.DenysSyrotiuk.threads.CheckTheEndGame;
 import org.DenysSyrotiuk.threads.RegenerationPlants;
@@ -8,7 +13,7 @@ import org.DenysSyrotiuk.threads.RegenerationPlants;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-/*        Daisy daisy = new Daisy();
+        Daisy daisy = new Daisy();
         daisy.setIcon("🌼");
         daisy.setWeight(1.5);
         daisy.setMaxAmount(88);
@@ -43,7 +48,7 @@ public class Main {
         serializationYaml.pushOrganism(daisy);
         serializationYaml.pushOrganism(fern);
         serializationYaml.pushOrganism(rabbit);
-        serializationYaml.pushOrganism(wolf);*/
+        serializationYaml.pushOrganism(wolf);
 
         GameEngin gameEngin = new GameEngin();
 
