@@ -49,8 +49,12 @@ public class Main {
         serializationYaml.pushOrganism(fern);
         serializationYaml.pushOrganism(rabbit);
         serializationYaml.pushOrganism(wolf);
+        System.out.println(wolf.getClass());
 
         GameEngin gameEngin = new GameEngin();
+
+
+
 
         /** Работает checkTheEndGame*/
         CheckTheEndGame checkTheEndGame = new CheckTheEndGame(gameEngin);
