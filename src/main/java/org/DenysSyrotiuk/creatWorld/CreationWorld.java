@@ -14,6 +14,7 @@ import java.util.*;
 public class CreationWorld {
     private final SerializationYaml serializationYaml = new SerializationYaml();
     private final Map<Type, Organism> deserializationOrganisms = new HashMap<>();
+
     @Getter
     private GameField gameField;
 
@@ -37,7 +38,7 @@ public class CreationWorld {
                 case 1 -> pathToResourcesClass = "src/main/resources/herbivores/";
                 default -> pathToResourcesClass = "src/main/resources/predators/";
             }
-            System.out.println(System.getProperty("os.name"));
+
             Path directory = Path.of(pathToResourcesClass);
             try (DirectoryStream<Path> files = Files.newDirectoryStream(directory)) {
                 for (Path p : files) {
@@ -46,8 +47,8 @@ public class CreationWorld {
                             + p.toString().substring(
                                     p.toString().indexOf("src") + 19,
                                     p.toString().lastIndexOf(".yaml"))
-                            .replace('/', '.')
-                            .replace('\\', '.');
+                            .replace('/', '.')      // For Mac OS
+                            .replace('\\', '.');    // For Windows OS
                     deserializationOrganisms.put(
                             Class.forName(nameOrganismClass),
                             (Organism) serializationYaml.pull(p.toString(), Class.forName(nameOrganismClass)));

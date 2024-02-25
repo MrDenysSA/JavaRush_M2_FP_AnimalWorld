@@ -28,24 +28,23 @@ public class GameEngin {
         }
     }
 
-    /**
-     * For single Thread (from Main)
-     */
+    /** For single Thread */
     public void start() {
         while (gamePlay) {
             statisticMonitor.view(gameField, day);
-            eatAnimal(); // №1
-            removeDeadAnimals();// №2 обязатльно нужно удалить дохлых перед размножением
-            reproduceAnimals(); // №3
-            moveAnimals(); // №4 могут умереть при ходах.
+            eatAnimal();
+            removeDeadAnimals();
+            reproduceAnimals();
+            moveAnimals();
 
-            regenerationPlants(); // В треде
-            checkTheEndGame(); // В треде
+            regenerationPlants();
+            checkTheEndGame();
 
             day++;
         }
     }
 
+    /** Thread AnimalsPlay */
     @SneakyThrows
     public void animalPlay() {
         while (gamePlay) {
@@ -195,11 +194,13 @@ public class GameEngin {
                                     boolean remove = gameField.getCells()[yOld][xOld].getResidents().get(organism.getClass()).remove(organism);
                                     yOld = yNew;
                                     xOld = xNew;
+
 /*                                    System.out.println("Organizm: " + organism.getIcon() + " " + organism.hashCode() + "\n"
                                             + "ADD done?: " + add + "\n"
                                             + "ADD y: " + yNew + "; x " + xNew + "\n"
                                             + "remove done?: " + remove + "\n"
-                                            + "remove y: " + yOld + "; x " + xOld + "\n");*/
+                                            + "remove y: " + yOld + "; x " + xOld + "\n"); */
+
                                 }
                             }
                         }
@@ -209,9 +210,7 @@ public class GameEngin {
         }
     }
 
-    /**
-     * Thread RegenerationPlants
-     */
+    /** Thread RegenerationPlants */
     public synchronized void regenerationPlants() {
         Map<Type, Set<Organism>> regenerationPlantsMap = new HashMap<>();
         for (int i = 0; i < gameField.getCells().length; i++) {
@@ -235,9 +234,7 @@ public class GameEngin {
         System.out.println("");
     }
 
-    /**
-     * Thread threadCheckTheEndGame
-     */
+    /** Thread CheckTheEndGame */
     public synchronized void checkTheEndGame() {
         boolean ruzzltat = false;
 
