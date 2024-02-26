@@ -3,6 +3,9 @@ package org.DenysSyrotiuk.threads;
 import lombok.SneakyThrows;
 import org.DenysSyrotiuk.creatWorld.GameEngin;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadsService {
 
     private final AnimalsPlay animalsPlay;
@@ -26,10 +29,19 @@ public class ThreadsService {
         threadRegenerationPlants.start();
 
         threadCheckTheEndGame.join();
-        regenerationPlants.setStop(true);
-        animalsPlay.setStop(true);
+        Thread.sleep(1000);
+        System.out.println("Game Over");
+    }
 
-        Thread.sleep(500);
+    @SneakyThrows
+    public void startExecutorService(){
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        executor.execute(animalsPlay);
+        executor.execute(checkTheEndGame);
+        executor.execute(regenerationPlants);
+
+        Thread.sleep(5000);
+        executor.shutdown();
         System.out.println("Game Over");
     }
 }

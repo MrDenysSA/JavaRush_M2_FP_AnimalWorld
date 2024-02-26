@@ -54,13 +54,18 @@ public class Main {
 
 
         GameEngin gameEngin = new GameEngin();
-        /** single Thread Start Game*/
-//        gameEngin.start();
 
+
+        /** single Thread Start Game*/
+/*        gameEngin.start();
+        System.out.println("Game Over");*/
 
         /** Thread Start Game  */
         ThreadsService threadsService = new ThreadsService(gameEngin);
         threadsService.start();
 
+        /** ExecutorService Start Game  */
+/*        ThreadsService threadsService = new ThreadsService(gameEngin);
+        threadsService.startExecutorService();*/
     }
 }

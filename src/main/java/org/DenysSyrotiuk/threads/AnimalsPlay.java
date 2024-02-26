@@ -18,8 +18,9 @@ public class AnimalsPlay implements Runnable {
     @SneakyThrows
     @Override
     public void run() {
-        while (!isStop) {
+        while (gameEngin.gamePlay) {
             gameEngin.animalPlay();
         }
+        Thread.currentThread().interrupt();
     }
 }

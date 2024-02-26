@@ -18,9 +18,10 @@ public class RegenerationPlants implements Runnable{
     @SneakyThrows
     @Override
     public void run() {
-        while (!isStop) {
+        while (gameEngin.gamePlay) {
             gameEngin.regenerationPlants();
             Thread.sleep(1);
         }
+        Thread.currentThread().interrupt();
     }
 }

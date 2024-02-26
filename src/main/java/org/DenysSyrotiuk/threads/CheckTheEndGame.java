@@ -21,6 +21,7 @@ public class CheckTheEndGame implements Runnable {
         while (gameEngin.gamePlay) {
             gameEngin.checkTheEndGame();
         }
+        Thread.currentThread().interrupt();
 
     }
 }
