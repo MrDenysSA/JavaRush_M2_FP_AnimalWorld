@@ -3,7 +3,7 @@ package org.DenysSyrotiuk.organism.predators;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.DenysSyrotiuk.organism.Predator;
 
-public class Wolf extends Predator {
+public class Eagle extends Predator {
     @JsonIgnore
     private static long serialUID = 1L;
     @JsonIgnore
@@ -11,8 +11,8 @@ public class Wolf extends Predator {
 
 
     @Override
-    public Wolf reproduce() {
-        Wolf org = new Wolf();
+    public Eagle reproduce() {
+        Eagle org = new Eagle();
 
         org.setIcon(getIcon());
         org.setWeight(getWeight());

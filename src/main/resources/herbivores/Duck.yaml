@@ -1,0 +1,12 @@
+---
+icon: "🦆"
+weight: 1.0
+maxAmount: 200
+speed: 4
+maxFoodForSaturation: 0.15
+hunger: 0.15
+targetMatrix:
+  org.DenysSyrotiuk.organism.herbivores.Caterpillar: 90
+  org.DenysSyrotiuk.organism.plants.Fern: 100
+  org.DenysSyrotiuk.organism.plants.Daisy: 100
+alive: true

@@ -1,10 +1,10 @@
 ---
-icon: "🐇"
-weight: 2.0
-maxAmount: 150
-speed: 2
-maxFoodForSaturation: 0.45
-hunger: 0.45
+icon: "🦌"
+weight: 300.0
+maxAmount: 20
+speed: 4
+maxFoodForSaturation: 50.0
+hunger: 25.0
 targetMatrix:
   org.DenysSyrotiuk.organism.plants.Fern: 100
   org.DenysSyrotiuk.organism.plants.Daisy: 100

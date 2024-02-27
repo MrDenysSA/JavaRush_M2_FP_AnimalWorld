@@ -1,0 +1,13 @@
+---
+icon: "🦊"
+weight: 8.0
+maxAmount: 30
+speed: 2
+maxFoodForSaturation: 2.0
+hunger: 1.0
+targetMatrix:
+  org.DenysSyrotiuk.organism.herbivores.Caterpillar: 40
+  org.DenysSyrotiuk.organism.herbivores.Mouse: 90
+  org.DenysSyrotiuk.organism.herbivores.Rabbit: 70
+  org.DenysSyrotiuk.organism.herbivores.Duck: 60
+alive: true

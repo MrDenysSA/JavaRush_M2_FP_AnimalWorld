@@ -1,18 +1,17 @@
-package org.DenysSyrotiuk.organism.predators;
+package org.DenysSyrotiuk.organism.herbivores;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.DenysSyrotiuk.organism.Predator;
+import org.DenysSyrotiuk.organism.Herbivore;
 
-public class Wolf extends Predator {
+public class Duck extends Herbivore {
     @JsonIgnore
     private static long serialUID = 1L;
     @JsonIgnore
     private final long UID = serialUID++;
 
-
     @Override
-    public Wolf reproduce() {
-        Wolf org = new Wolf();
+    public Duck reproduce() {
+        Duck org = new Duck();
 
         org.setIcon(getIcon());
         org.setWeight(getWeight());
@@ -28,10 +27,10 @@ public class Wolf extends Predator {
     }
 
     @Override
-    public void move() {
+    public void eat() {
     }
 
     @Override
-    public void eat() {
+    public void move() {
     }
 }

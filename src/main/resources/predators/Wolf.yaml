@@ -4,7 +4,15 @@ weight: 50.0
 maxAmount: 30
 speed: 3
 maxFoodForSaturation: 8.0
-hunger: 0.0
+hunger: 4.0
 targetMatrix:
+  org.DenysSyrotiuk.organism.herbivores.Goat: 60
+  org.DenysSyrotiuk.organism.herbivores.Mouse: 80
   org.DenysSyrotiuk.organism.herbivores.Rabbit: 60
+  org.DenysSyrotiuk.organism.herbivores.Deer: 15
+  org.DenysSyrotiuk.organism.herbivores.Duck: 40
+  org.DenysSyrotiuk.organism.herbivores.Sheep: 70
+  org.DenysSyrotiuk.organism.herbivores.Boar: 15
+  org.DenysSyrotiuk.organism.herbivores.Horse: 10
+  org.DenysSyrotiuk.organism.herbivores.Buffalo: 10
 alive: true

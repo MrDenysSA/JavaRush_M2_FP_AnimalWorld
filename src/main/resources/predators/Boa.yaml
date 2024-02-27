@@ -1,0 +1,13 @@
+---
+icon: "🐍"
+weight: 15.0
+maxAmount: 30
+speed: 1
+maxFoodForSaturation: 3.0
+hunger: 1.5
+targetMatrix:
+  org.DenysSyrotiuk.organism.herbivores.Mouse: 40
+  org.DenysSyrotiuk.organism.herbivores.Rabbit: 20
+  org.DenysSyrotiuk.organism.predators.Fox: 15
+  org.DenysSyrotiuk.organism.herbivores.Duck: 10
+alive: true
