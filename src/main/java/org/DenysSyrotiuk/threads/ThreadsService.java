@@ -1,7 +1,7 @@
 package org.DenysSyrotiuk.threads;
 
 import lombok.SneakyThrows;
-import org.DenysSyrotiuk.creatWorld.GameEngin;
+import org.DenysSyrotiuk.engin.GameEngin;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,7 +12,10 @@ public class ThreadsService {
     private final CheckTheEndGame checkTheEndGame;
     private final RegenerationPlants regenerationPlants;
 
+    private final GameEngin gameEngin;
+
     public ThreadsService(GameEngin gameEngin) {
+        this.gameEngin = gameEngin;
         this.animalsPlay = new AnimalsPlay(gameEngin);
         this.checkTheEndGame = new CheckTheEndGame(gameEngin);
         this.regenerationPlants = new RegenerationPlants(gameEngin);
@@ -40,8 +43,11 @@ public class ThreadsService {
         executor.execute(checkTheEndGame);
         executor.execute(regenerationPlants);
 
-        Thread.sleep(5000);
+        while (gameEngin.gamePlay) {
+            // waiting for the end of the game
+        }
         executor.shutdown();
+        Thread.sleep(1000);
         System.out.println("Game Over");
     }
 }

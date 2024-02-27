@@ -4,7 +4,7 @@ weight: 6.0
 maxAmount: 20
 speed: 3
 maxFoodForSaturation: 1.0
-hunger: 1.0
+hunger: 0.0
 targetMatrix:
   org.DenysSyrotiuk.organism.herbivores.Mouse: 90
   org.DenysSyrotiuk.organism.herbivores.Rabbit: 90

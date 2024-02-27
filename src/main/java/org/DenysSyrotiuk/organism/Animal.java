@@ -40,8 +40,13 @@ public abstract class Animal extends Organism implements Movable, Eat, Reproduci
     }
 
     public void checkSurvivability() {
-        if (hunger > 0.0) {
-            hunger = hunger - Math.ceil(hunger / 4);
+        if (hunger > 0.00) {
+            if (maxFoodForSaturation == 0.0) {
+                hunger = hunger - 1;
+            }else {
+                hunger = hunger - (maxFoodForSaturation / 2);
+            }
+
         } else {
             setAlive(false);
         }

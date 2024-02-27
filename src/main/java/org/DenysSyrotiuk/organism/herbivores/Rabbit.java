@@ -16,11 +16,9 @@ public class Rabbit extends Herbivore {
         rabbit.setIcon(getIcon());
         rabbit.setWeight(getWeight());
         rabbit.setMaxAmount(getMaxAmount());
-        rabbit.setAlive(true);
 
         rabbit.setSpeed(getSpeed());
         rabbit.setMaxFoodForSaturation(getMaxFoodForSaturation());
-        rabbit.setHunger(getHunger());
         rabbit.setTargetMatrix(getTargetMatrix());
 
         return rabbit;

@@ -17,11 +17,9 @@ public class Fox extends Predator {
         org.setIcon(getIcon());
         org.setWeight(getWeight());
         org.setMaxAmount(getMaxAmount());
-        org.setAlive(true);
 
         org.setSpeed(getSpeed());
         org.setMaxFoodForSaturation(getMaxFoodForSaturation());
-        org.setHunger(getHunger());
         org.setTargetMatrix(getTargetMatrix());
 
         return org;

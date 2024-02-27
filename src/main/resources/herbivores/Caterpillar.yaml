@@ -7,5 +7,4 @@ maxFoodForSaturation: 0.0
 hunger: 0.0
 targetMatrix:
   org.DenysSyrotiuk.organism.plants.Fern: 100
-  org.DenysSyrotiuk.organism.plants.Daisy: 100
 alive: true

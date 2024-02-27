@@ -3,7 +3,7 @@ package org.DenysSyrotiuk.threads;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-import org.DenysSyrotiuk.creatWorld.GameEngin;
+import org.DenysSyrotiuk.engin.GameEngin;
 @Getter
 @Setter
 public class RegenerationPlants implements Runnable{

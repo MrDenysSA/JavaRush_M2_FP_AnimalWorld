@@ -4,8 +4,7 @@ weight: 700.0
 maxAmount: 10
 speed: 3
 maxFoodForSaturation: 100.0
-hunger: 50.0
+hunger: 0.0
 targetMatrix:
   org.DenysSyrotiuk.organism.plants.Fern: 100
-  org.DenysSyrotiuk.organism.plants.Daisy: 100
 alive: true

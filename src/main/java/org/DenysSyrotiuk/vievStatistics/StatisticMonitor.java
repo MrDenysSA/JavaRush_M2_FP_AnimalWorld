@@ -19,26 +19,31 @@ public class StatisticMonitor {
         System.out.println(ANSI_RED + "DAY №: " + day + ANSI_RESET);
         for (int i = 0; i < gameField.cells.length; i++) {
             for (int j = 0; j < gameField.cells[i].length; j++) {
-
                 System.out.println("Sell №: " + i + "_" + j);
                 gameField.cells[i][j].getResidents()
-                        .forEach((type, organisms) -> System.out.println(type.getTypeName()
-                                .substring(type.getTypeName().indexOf("organism") + 9)
-                                + ": "
-                                + organisms.size()));
+                        .forEach((type, organisms) -> {
+                            if (!organisms.isEmpty()) {
+                                System.out.println(type.getTypeName()
+                                        .substring(type.getTypeName().indexOf("organism") + 9)
+                                        + ": "
+                                        + organisms.size());
+                            }
+                        });
             }
         }
         System.out.println("***********************");
     }
 
     public void deadAnimals(Map<Type, Set<Organism>> removeDeadMap, int i, int j, String nameMethod, String colorText) {
-        System.out.println(colorSwitch(colorText) + "Sell №: " + i + "_" + j + " " + nameMethod);
-        removeDeadMap.forEach((type, organisms) -> {
-            System.out.println(type.getTypeName()
-                    .substring(type.getTypeName().indexOf("organism") + 9)
-                    + ": " + organisms.size());
-        });
-        System.out.print(ANSI_RESET);
+        if (!removeDeadMap.isEmpty()) {
+            System.out.println(colorSwitch(colorText) + "Sell №: " + i + "_" + j + " " + nameMethod);
+            removeDeadMap.forEach((type, organisms) -> {
+                System.out.println(type.getTypeName()
+                        .substring(type.getTypeName().indexOf("organism") + 9)
+                        + ": " + organisms.size());
+            });
+            System.out.print(ANSI_RESET);
+        }
     }
 
     private String colorSwitch(String colorText) {

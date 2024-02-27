@@ -10,12 +10,10 @@ public class Boa extends Predator {
     private final long UID = serialUID++;
     @Override
     public void eat() {
-
     }
 
     @Override
     public void move() {
-
     }
 
     @Override
@@ -25,11 +23,9 @@ public class Boa extends Predator {
         org.setIcon(getIcon());
         org.setWeight(getWeight());
         org.setMaxAmount(getMaxAmount());
-        org.setAlive(true);
 
         org.setSpeed(getSpeed());
         org.setMaxFoodForSaturation(getMaxFoodForSaturation());
-        org.setHunger(getHunger());
         org.setTargetMatrix(getTargetMatrix());
 
         return org;
